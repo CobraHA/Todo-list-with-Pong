@@ -7,6 +7,10 @@
     const selectedColors = ref("orange")
     const selectedColors2 = ref("orange")
     
+    const backgroundImages = ref(['../media/GrassBackground.jpg', '../media/Beach.jpg', '../media/sunSet.jpg'])
+    
+    const selectedBackgroundImage = "../media/GrassBackground.jpg"
+    
     const scoreLeft = ref(0)
     const scoreRight = ref(0)
     const speed = ref(50)
@@ -146,7 +150,7 @@
         if ( marginLeft ==  77 )   {
             if ( parseInt(tmpPf[0]) < marginTop && marginTop < (parseInt(tmpPf[0]) + 11) ){
                 leftToRight = false;
-                if ( speed.value > 25 ){
+                if ( speed.value > 17.5 ){
                     clearInterval(timer)
                     speed.value -= 2.5
                     timer=setInterval(function () {
@@ -165,7 +169,7 @@
         if ( marginLeft == -77 ){
         if ( parseInt(tmpWS[0]) < marginTop && marginTop < (parseInt(tmpWS[0]) + 11) ){
                 leftToRight = true;
-                if ( speed.value > 25 ){
+                if ( speed.value > 17.5 ){
                     clearInterval(timer)
                     speed.value -= 2.5
                     timer=setInterval(function () {
@@ -201,43 +205,43 @@
 </script>
 
 <template>
-    <h2>Pong</h2>
-    <audio id = "Ricky">
-        <source src = "../media/Rickroll.mp3" type = "audio/mpeg" >
-    </audio>
-    
-    <audio id = "pongSong">
-        <source src = "../media/bensound-moose.mp3" type = "audio/mpeg">
-    </audio>
-    <div>
-    <input type = "text" class = "colorInput" v-model = "newColor">
-        <select class = "playerLeft" v-model = "selectedColors">
-            <option v-for = "color in colors">{{color}}</option>
-        </select>    
-    
-        {{scoreLeft}}
-        <button id="start-btn" @click="start()" style = "margin: 0 2rem 0 2rem">Start</button>
-        {{scoreRight}}
+        <h2>Pong</h2>
         
-        <select class = "playerRight" v-model = "selectedColors2">
-            <option v-for = "color in colors">{{color}}</option>
-        </select>
-        <button type = "submit" class = "colorInput" @click = "addColor()">add</button>
+        <audio id = "Ricky">
+            <source src = "../media/Rickroll.mp3" type = "audio/mpeg" >
+        </audio>
         
-    </div>
-    <fieldset class = "field">
-        <div class = "box" id= "boxWS">
+        <audio id = "pongSong">
+            <source src = "../media/bensound-moose.mp3" type = "audio/mpeg">
+        </audio>
+        <div> 
+        <input type = "text" class = "colorInput" v-model = "newColor">
+            <select class = "playerLeft" v-model = "selectedColors">
+                <option v-for = "color in colors">{{color}}</option>
+            </select>    
+        
+            {{scoreLeft}}
+            <button id="start-btn" @click="start()" style = "margin: 0 2rem 0 2rem">Start</button>
+            {{scoreRight}}
+            
+            <select class = "playerRight" v-model = "selectedColors2">
+                <option v-for = "color in colors">{{color}}</option>
+            </select>
+            <button type = "submit" class = "colorInput" @click = "addColor()">add</button>
             
         </div>
-        
-        <div id = "ball"></div>
-        
-        <div class = "box" id="boxPfeil">
+        <fieldset class = "field">
+            <div class = "box" id= "boxWS">
+                
+            </div>
             
+            <div id = "ball"></div>
+            
+            <div class = "box" id="boxPfeil">
+                
         </div>
-    </fieldset>
-            <input type = "text" @keydown="pressed" style = "height: 3px" @click="start()"/>
-
+        </fieldset>
+                <input type = "text" @keydown="pressed" style = "height: 3px" @click="start()"/>
 </template>
 
 <style scoped>
@@ -248,6 +252,8 @@
         background-color: orange;
         
     }
+    
+    
     
     #boxWS{
         margin: 16rem 0 0.5rem 2rem;
@@ -263,7 +269,8 @@
         display: flex;
         width: 100rem;
         height: 45rem;
-        background-color: #aaffaa;
+        
+        background-image: url('../media/GrassBackground.jpg');
         
         justify-content: space-between;
     }
@@ -272,7 +279,7 @@
         margin-top: 21rem;
         height: 1rem;
         width: 1rem;
-        background-color: #554400;
+        background-color: white;
     }
     
     .playerLeft{
