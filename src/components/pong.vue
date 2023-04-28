@@ -9,6 +9,7 @@
     
     const scoreLeft = ref(0)
     const scoreRight = ref(0)
+    const speed = ref(50)
     
     
      //method to handle start/stop of jumping ball
@@ -20,7 +21,7 @@
             //start jumping the ball
             timer=setInterval(function () {
                 jumpBall();         
-            },30);
+            },speed.value);
             btn.innerHTML='Stop';
             audio.play()
             rickroll.pause();
@@ -44,7 +45,7 @@
         let boxWS = document.getElementById("boxWS")
         
         
-        console.log(evt)
+        //console.log(evt)
         
 //              WS-tasten Box Bewegen    
         
@@ -53,7 +54,7 @@
             
             if ( tmp[0] != "" && parseInt(tmp[0]) < 33) {
                 boxWS.style.marginTop = (parseInt(tmp[0]) + 3) + "rem" 
-                console.log(tmp)
+               // console.log(tmp)
             }
             else if ( tmp[0] == "" )    {
                 boxWS.style.marginTop = "19rem" 
@@ -65,7 +66,7 @@
             
             if ( tmp[0] != "" && parseInt(tmp[0]) > 1) {
                 boxWS.style.marginTop = (parseInt(tmp[0]) + -3) + "rem" 
-                console.log(tmp)
+                //console.log(tmp)
             }
             else if ( tmp[0] == "" )    {
                 boxWS.style.marginTop = "13rem" 
@@ -79,7 +80,7 @@
             
             if ( tmp[0] != "" && parseInt(tmp[0]) < 33) {
                 boxPfeil.style.marginTop = (parseInt(tmp[0]) + 3) + "rem" 
-                console.log(tmp)
+               // console.log(tmp)
             }
             else if ( tmp[0] == "" )    {
                 boxPfeil.style.marginTop = "19rem" 
@@ -91,7 +92,7 @@
             
             if ( tmp[0] != "" && parseInt(tmp[0]) > 1) {
                 boxPfeil.style.marginTop = (parseInt(tmp[0]) + -3) + "rem" 
-                console.log(tmp)
+                //console.log(tmp)
             }
             else if ( tmp[0] == "" )    {
                 boxPfeil.style.marginTop = "1rem" 
@@ -101,6 +102,7 @@
         if ( evt.keyCode == 13 ){
             start()
         }
+    console.log(speed.value)
     }
     
 
@@ -144,26 +146,45 @@
         if ( marginLeft ==  77 )   {
             if ( parseInt(tmpPf[0]) < marginTop && marginTop < (parseInt(tmpPf[0]) + 11) ){
                 leftToRight = false;
+                if ( speed.value > 25 ){
+                    clearInterval(timer)
+                    speed.value -= 2.5
+                    timer=setInterval(function () {
+                    jumpBall();         
+                },speed.value);
+                }
             }else{
                 scoreLeft.value += 1
                 start()
                 leftToRight = false
+                speed.value = 50;
+                
             }
             
         }
         if ( marginLeft == -77 ){
         if ( parseInt(tmpWS[0]) < marginTop && marginTop < (parseInt(tmpWS[0]) + 11) ){
                 leftToRight = true;
+                if ( speed.value > 25 ){
+                    clearInterval(timer)
+                    speed.value -= 2.5
+                    timer=setInterval(function () {
+                    jumpBall();         
+                },speed.value);
+                }
+                
+                
             }else{
                 scoreRight.value += 1
                 start()
                 leftToRight = true;
+                speed.value = 50;
             
             }       
         }
 //         console.log(marginTop)
         console.log(marginTop)
-        console.log(parseInt(tmpPf[0]), marginTop, (parseInt(tmpPf[0]) + 1))
+        //console.log(parseInt(tmpPf[0]), marginTop, (parseInt(tmpPf[0]) + 1))
     }
     
     const addColor = () => {
